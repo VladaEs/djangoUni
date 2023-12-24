@@ -1,0 +1,44 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>my blog</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="pageWrapper">
+        <header>
+            <ul>
+                <li><a href="/">Posts</a></li>
+                <li><a href="/admin">Admin</a></li>
+                <li><a href="/book_table">BookTables</a></li>
+            </ul>
+        </header>
+
+        <div class="postsWrapper">
+            <section class="post mainPost"><span>Пости</span>
+
+                <div>Всі пости: {{ count }}</div>
+            </section>
+             {% for post in post_list %}
+
+                <section class="post">
+
+                    <div class="TitlePost"><a href="{{ post.id }}">{{ post.title}}</a></div>
+                    <img src="{{ post.img.url }}" class="imgPost">
+                    <p class="ContentPost">{{ post.description}}</p>
+                    <div class="author"> Автор: {{ post.author}}</div>
+
+                </section>
+            {%   endfor %}
+        </div>
+
+
+    </div>
+</body>
+</html>

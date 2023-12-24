@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book a table</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/BookTable.css' %}" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+        <header>
+            <ul>
+                <li><a href="/">Posts</a></li>
+                <li><a href="/admin">Admin</a></li>
+                <li><a href="/book_table">BookTables</a></li>
+
+            </ul>
+        </header>
+    <div class="PageWrapper">
+        <div class="postsWrapper">
+            <form class="DateForm" name="DateForm" action="{% url 'booking_table' %}" method="get">
+                {% csrf_token %}
+                <span>Введіть дату на яку Вам потрібен стіл</span>
+
+                <div class="DateWrapper">
+                    <input type="date" class="dataForm" min="{% now "Y-m-d" %}" value="{{  selected_date  }}" name="date">
+                    <input type="submit" class="Submit_btn">
+                </div>
+            </form>
+        </div>
+
+        <div class="TablesWrapper postsWrapper">
+            <form name="TablesForm" action="{% url 'booking_table'  %}" method="post">
+                {% csrf_token %}
+                <!--- <input class="checkbox" type="checkbox" name="selected_tables" value="1" id="Table1" >
+                <input class="checkbox" type="checkbox" name="selected_tables" value="2"  id="Table2">
+                <input class="checkbox" type="checkbox" name="selected_tables" value="3"  id="Table3">
+                <input class="checkbox" type="checkbox" name="selected_tables" value="4"  id="Table4">
+                <input class="checkbox" type="checkbox" name="selected_tables" value="5"  id="Table5">
+                <input class="checkbox" type="checkbox" name="selected_tables" value="6"  id="Table6">
+
+
+                <label class="labelCheckBox checkbox1" for="Table1">1</label>
+                <label class="labelCheckBox checkbox2" for="Table2">2</label>
+                <label class="labelCheckBox checkbox3" for="Table3">3</label>
+                <label class="labelCheckBox checkbox4" for="Table4">4</label>
+                <label class="labelCheckBox checkbox5" for="Table5">5</label>
+                <label class="labelCheckBox checkbox6" for="Table6">6</label>--->
+
+
+    {% for i in "123456" %}
+        {% if i in tables %}
+            <label class="labelCheckBox checkbox{{ i }} Booked" for="Table{{ i }}"><img src="{% static 'images/table.png' %}"></label>
+        {% else %}
+            <input class="checkbox" type="checkbox" name="selected_tables" value="{{ i }}" id="Table{{ i }}">
+            <label class="labelCheckBox checkbox{{ i }}" for="Table{{ i }}"><img src="{% static 'images/table.png' %}"></label>
+        {% endif %}
+
+    {% endfor %}
+    <input type="hidden" value="{{ selected_date }}" name="dateGet">
+
+                <div class="PersonData">
+                    <div>
+                        <label>Введіть своє прізвище:</label>
+                        <input type="text" name="surname" required placeholder="Surname">
+                    </div>
+                    <div>
+                        <label>Введіть свій email:</label>
+                        <input type="email" name="email" required placeholder="e-mail">
+                    </div>
+                </div>
+                <input type="submit" class="Submit_btnSecond">
+
+            </form>
+        </div>
+
+
+    </div>
+
+<script src="{% static 'scripts/BookTable.js' %}"></script>
+</body>
+</html>

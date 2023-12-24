@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" type="text/css">
+</head>
+<body>
+        <header>
+            <ul>
+                <li><a href="/">Posts</a></li>
+                <li><a href="/admin">Admin</a></li>
+                <li><a href="/book_table">BookTables</a></li>
+
+            </ul>
+        </header>
+
+
+    <div class="LoginFrame">
+        <h1>Добро пожаловать на страницу входа</h1>
+        <form name="Login" action="{% url 'login_check' %}" method="post">
+                {% csrf_token %}
+        <div class="FormElement">
+            <label>Введите ваш никнейм</label><input type="text" name="NickName">
+        </div>
+        <div class="FormElement">
+            <label>Введите пароль:</label><input type="text" name="password">
+        </div>
+        <input type="submit" class="submit">
+        </form>
+    </div>
+</body>
+</html>
